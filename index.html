@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pushtopia turns your GitHub activity into care for a tiny macOS pet." />
+    <title>Pushtopia — Your GitHub activity, cared for</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Pushtopia home"><span class="brand-pixel" aria-hidden="true">✦</span> Pushtopia</a>
+      <nav aria-label="Primary navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a class="button button-small" href="#download">Try the beta</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero section-shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> A tiny companion for your coding days</p>
+          <h1 id="hero-title">Your GitHub activity, <em>cared for.</em></h1>
+          <p class="lede">Pushtopia is a friendly macOS app that turns your GitHub rhythm into a little world to look after. Commit, review, and keep your pet thriving.</p>
+          <div class="hero-actions">
+            <a class="button" data-beta-link href="#download">Get the beta</a>
+            <a class="button button-quiet" data-login-link href="#login">Log in <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="availability" data-beta-status>Beta download coming soon. No download is available yet.</p>
+        </div>
+        <div class="pet-card" aria-label="Pixel-art preview of a Pushtopia pet">
+          <div class="spark spark-one" aria-hidden="true">✦</div>
+          <div class="spark spark-two" aria-hidden="true">·</div>
+          <div class="pet-shadow" aria-hidden="true"></div>
+          <img class="pet-image" src="assets/pushtopia-dog-happy.png" width="256" height="256" alt="Brita, a happy pixel-art Pushtopia dog" />
+          <p class="pet-label">Your companion is waiting</p>
+        </div>
+      </section>
+
+      <section class="section-shell value-grid" aria-label="Pushtopia benefits">
+        <article><span class="icon" aria-hidden="true">✦</span><h2>Make progress feel alive</h2><p>Small coding moments become visible care, giving your work a gentle sense of momentum.</p></article>
+        <article><span class="icon" aria-hidden="true">♥</span><h2>A calm desktop ritual</h2><p>Your pet lives quietly alongside your workflow, without noisy streaks or heavy dashboards.</p></article>
+        <article><span class="icon" aria-hidden="true">◆</span><h2>Built for the Mac</h2><p>A lightweight menu-bar companion designed for the way you already work.</p></article>
+      </section>
+
+      <section class="section-shell two-column" id="how-it-works" aria-labelledby="how-title">
+        <div><p class="eyebrow">The loop</p><h2 id="how-title">A simple rhythm for your day.</h2><p class="section-intro">Pushtopia connects to the GitHub account you choose inside the macOS app. Your activity helps your pet stay well and unlocks gentle changes over time.</p></div>
+        <ol class="steps"><li><span>01</span><div><h3>Sign in on your Mac</h3><p>The MVP uses GitHub OAuth App Device Flow inside the app.</p></div></li><li><span>02</span><div><h3>Keep building</h3><p>Commits and other supported activity become signals for your companion.</p></div></li><li><span>03</span><div><h3>Care for your pet</h3><p>Check in, notice its state, and let your coding rhythm shape the world.</p></div></li></ol>
+      </section>
+
+      <section class="section-shell states" aria-labelledby="states-title"><div><p class="eyebrow">A little world</p><h2 id="states-title">Your pet reflects the rhythm, not your worth.</h2><p class="section-intro">Pushtopia is designed to make progress feel kind. There are no public leaderboards and no pressure to be online all the time.</p></div><div class="state-list"><div><span class="state-icon">☼</span><p><strong>Happy</strong><br />Your pet is enjoying a steady flow of care.</p></div><div><span class="state-icon">·</span><p><strong>Neutral</strong><br />A steady, ordinary moment in your coding rhythm.</p></div><div><span class="state-icon">♡</span><p><strong>Needs care</strong><br />A gentle nudge to check in when you can.</p></div></div></section>
+
+      <section class="section-shell privacy-band" id="privacy" aria-labelledby="privacy-title"><div><p class="eyebrow">Privacy by default</p><h2 id="privacy-title">Your code stays yours.</h2><p>We do not ask the landing page to access your GitHub activity. Sign-in happens in the macOS MVP through the existing GitHub OAuth App Device Flow. The web login and any public beta release are not available yet.</p></div><span class="privacy-lock" aria-hidden="true">▣</span></section>
+
+      <section class="section-shell download" id="download" aria-labelledby="download-title"><p class="eyebrow">Early access</p><h2 id="download-title">Come take care of a tiny friend.</h2><p class="section-intro" data-beta-copy>Pushtopia is currently preparing its macOS beta. We will publish a real installer link here when one is ready.</p><div class="download-actions"><a class="button" data-beta-link href="#download">Beta download coming soon</a><a class="button button-quiet" data-login-link href="#login">Login is not available yet</a></div><p class="requirements"><strong>Requirements:</strong> macOS 14 Sonoma or later is planned for the MVP. Final support details will be confirmed with the beta release.</p></section>
+
+      <section class="section-shell support" id="login" aria-labelledby="support-title"><div><p class="eyebrow">Questions?</p><h2 id="support-title">We are still shaping the first home.</h2><p data-login-copy>There is no public support channel or web login configured yet. For now, this page is an honest preview of what is coming with the macOS MVP.</p></div><span class="support-note">Support channel coming soon.</span></section>
+    </main>
+    <footer class="site-footer section-shell"><span>© 2026 Pushtopia</span><span>Made for quiet progress.</span></footer>
+  </body>
+</html>
