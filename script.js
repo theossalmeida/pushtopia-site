@@ -2,40 +2,22 @@
   const config = window.PUSHTOPIA_CONFIG || {};
   const betaUrl = typeof config.betaDownloadUrl === "string" ? config.betaDownloadUrl.trim() : "";
   const loginUrl = typeof config.loginUrl === "string" ? config.loginUrl.trim() : "";
-  const betaLinks = document.querySelectorAll("[data-beta-link]");
-  const loginLinks = document.querySelectorAll("[data-login-link]");
-  const betaStatus = document.querySelector("[data-beta-status]");
-  const betaCopy = document.querySelector("[data-beta-copy]");
-  const loginCopy = document.querySelector("[data-login-copy]");
-
-  betaLinks.forEach(function (link) {
-    if (betaUrl) {
-      link.href = betaUrl;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Download the beta";
-    } else {
-      link.setAttribute("aria-disabled", "true");
-      link.addEventListener("click", function (event) { event.preventDefault(); });
-    }
+  const setLinks = (selector, url, fallback, activeLabel) => document.querySelectorAll(selector).forEach((link) => {
+    if (url) { link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = activeLabel; }
+    else { link.setAttribute("aria-disabled", "true"); link.addEventListener("click", (event) => event.preventDefault()); if (fallback) link.textContent = fallback; }
   });
-
-  if (betaUrl) {
-    if (betaStatus) betaStatus.textContent = "The beta installer is ready. Download and try the macOS MVP.";
-    if (betaCopy) betaCopy.textContent = "The macOS beta is ready for testing. Download the installer and meet your companion.";
-  }
-
-  loginLinks.forEach(function (link) {
-    if (loginUrl) {
-      link.href = loginUrl;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Log in ↗";
-    } else {
-      link.setAttribute("aria-disabled", "true");
-      link.addEventListener("click", function (event) { event.preventDefault(); });
-    }
-  });
-
-  if (loginUrl && loginCopy) loginCopy.textContent = "Web login is available through the configured link. The macOS MVP still uses GitHub OAuth App Device Flow inside the app.";
+  setLinks("[data-beta-link]", betaUrl, "Beta download coming soon", "Download the beta"); setLinks("[data-login-link]", loginUrl, "Login is not available yet", "Log in ↗");
+  if (betaUrl) { document.querySelector("[data-beta-status]").textContent = "The beta installer is ready. Download and try the macOS MVP."; document.querySelector("[data-beta-copy]").textContent = "The macOS beta is ready for testing. Download the installer and meet your companion."; }
+  if (loginUrl) document.querySelector("[data-login-copy]").textContent = "Web login is available through the configured link. The macOS MVP still uses GitHub OAuth App Device Flow inside the app.";
+  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+  const names = { dog: "Brita", cat: "Cat", shark: "Shark", eagle: "Eagle" }; let pet = "dog", stats = { satiety: 70, health: 80, happy: 60 }, eventIndex = 3, nextPoll = 8;
+  const events = [["PUSH", "git push origin main (3 commits)", { satiety: 10 }, "#ffb648", "+10 ◆"], ["WORKFLOW", "ci ✓ build · test · lint succeeded", { health: 5 }, "#5cd6ff", "+5 ♥"], ["REVIEW", "PR #142 APPROVED by @lina", { happy: 10 }, "#3dff8e", "+10 ☼"], ["PUSH", "git push fix/auth-token", { satiety: 10 }, "#ffb648", "+10 ◆"], ["WORKFLOW", "ci ✗ auth.spec.ts failed", { health: -10 }, "#ff5c5c", "−10 ♥"], ["REVIEW", "PR #145 CHANGES_REQUESTED by @tom", { happy: -10 }, "#ff5c5c", "−10 ☼"], ["PR", "PR #139 closed without merge", { happy: -5 }, "#ffb648", "−5 ☼"]];
+  const mood = () => stats.satiety === 0 && stats.health === 0 && stats.happy === 0 ? "exhausted" : stats.health < 30 ? "sick" : stats.happy < 30 || stats.satiety < 20 ? "sad" : stats.happy >= 70 && stats.health >= 50 && stats.satiety >= 40 ? "happy" : "neutral";
+  const update = () => { const state = mood(), sprite = document.querySelector("[data-pet-sprite]"); sprite.src = `assets/sprites/${pet}/${state}.png`; sprite.alt = `${names[pet]}, ${state} ${pet}`; document.querySelector("[data-pet-label]").textContent = pet; document.querySelector("[data-mood]").textContent = `${state} ${state === "happy" ? "☼" : state === "sad" ? "♡" : state === "sick" ? "✚" : state === "exhausted" ? "zz" : ""}`; ["satiety", "health", "happy"].forEach((key) => { document.querySelector(`[data-stat="${key}"]`).value = stats[key]; document.querySelector(`[data-bar="${key}"]`).style.setProperty("--value", `${stats[key]}%`); }); document.querySelectorAll("[data-selected-name]").forEach((node) => node.textContent = names[pet]); };
+  const addFeed = (event, time) => { const line = document.createElement("div"); line.className = "feed-line"; line.style.setProperty("--feed-color", event[3]); line.innerHTML = `<time>${time}</time><b style="background:${event[3]}">${event[0]}</b><span>${event[1]}</span><span>${event[4]}</span>`; const feed = document.querySelector("[data-feed]"); feed.append(line); while (feed.children.length > 7) feed.firstElementChild.remove(); };
+  const pad = (n) => String(n).padStart(2, "0"); const clock = () => { const d = new Date(); return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`; }; events.slice(0, 3).forEach((event) => addFeed(event, clock())); update();
+  document.querySelectorAll("[data-pet]").forEach((button) => button.addEventListener("click", () => { pet = button.dataset.pet; document.querySelectorAll("[data-pet]").forEach((choice) => choice.classList.toggle("selected", choice === button)); update(); }));
+  if (window.matchMedia?.("(max-width: 430px)").matches) { const picker = document.querySelector(".pet-picker"); if (picker) picker.style.gridTemplateColumns = "1fr"; document.querySelectorAll(".pet-choice img").forEach((image) => { image.style.width = "96px"; image.style.height = "96px"; }); }
+  setInterval(() => { nextPoll = nextPoll > 1 ? nextPoll - 1 : 2; document.querySelector("[data-next-poll]").textContent = nextPoll; }, 1000);
+  setInterval(() => { const event = events[eventIndex++ % events.length]; Object.keys(event[2]).forEach((key) => { stats[key] = Math.max(0, Math.min(100, stats[key] + event[2][key])); }); const wrap = document.querySelector("[data-pet-wrap]"); if (!reduceMotion) { wrap.style.animation = `${Object.values(event[2]).some((value) => value < 0) ? "shake" : "hop"} .55s steps(6)`; setTimeout(() => { wrap.style.animation = "bob 1.6s steps(4) infinite"; }, 650); } addFeed(event, clock()); update(); }, 2400);
 })();
