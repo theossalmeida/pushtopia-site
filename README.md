@@ -17,8 +17,8 @@ Open <http://localhost:4173>. The dev server serves the source files directly. `
 Copy `.env.example` to `.env` in your deployment environment. The build reads these public values:
 
 - `PUSHTOPIA_BETA_DOWNLOAD_URL`: real installer or beta URL. When empty, the page keeps the honest “Beta download coming soon” state.
-- `PUSHTOPIA_LOGIN_URL`: optional future web login destination. When empty, the login control remains disabled. The MVP's GitHub OAuth App Device Flow stays inside the macOS app; this site does not implement an OAuth callback.
-- `PUSHTOPIA_GITHUB_CLIENT_ID`: reserved public configuration for a future web entry point; it is not used by the current page.
+- `PUSHTOPIA_LOGIN_URL`: optional external web destination. When empty, the site's login link remains disabled. This does not sign a user into the macOS app; GitHub Device Flow happens inside the app.
+- `PUSHTOPIA_GITHUB_CLIENT_ID`: reserved and unused by the current site.
 
 Never put secrets in these variables or commit an `.env` file. The landing page does not call the app analytics endpoint and does not collect GitHub activity.
 
@@ -31,7 +31,7 @@ npm run typecheck
 npm run build
 ```
 
-There are no application tests in the empty starting repository; `npm test` runs Node's test runner and currently succeeds with no test files.
+`npm test` runs Node's test runner. The site currently has no separate application test files.
 
 ## Deploy
 
@@ -39,8 +39,7 @@ Deploy the contents of `dist/` with Cloudflare Pages (direct upload or a Pages p
 
 ## Pending launch items
 
-- Apple Developer signing/notarization and a real macOS installer are still required.
-- A public beta URL is not configured.
-- The MVP's GitHub OAuth App credentials and Device Flow remain app-side concerns; no OAuth App or GitHub App was created here.
-- A public web login, auto-update channel, support destination, and any future GitHub App disclosure need product/backend decisions before being enabled.
+- The app's levels, streaks, account sync, pet states and activity rules are implemented. This site describes those current features; it does not promise profile badges or cosmetic unlocks.
+- The app processes GitHub activity and progress locally. Optional account sync stores limited pseudonymous progress on the backend; optional analytics sends a minimal app-open event and can be disabled in Settings.
+- A public beta download, privacy notice and support contact must be configured before inviting beta users. See the app repository's `docs/RELEASE.md` and `docs/SECURITY_PRIVACY.md` for the current launch gates.
 - The Cloudflare Pages project and its deployment settings still need to be configured by the owner.
