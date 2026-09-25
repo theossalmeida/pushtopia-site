@@ -28,7 +28,7 @@
     document.querySelector("[data-login-copy]").textContent = "Web login is available through the configured link. GitHub sign-in for the macOS app happens inside the app.";
   }
 
-  const names = { dog: "Brita", cat: "Cat", shark: "Shark", eagle: "Eagle" };
+  const names = { dog: "Brita", cat: "Boomie", shark: "Haze", eagle: "Bono" };
   const pet = { id: "dog", indicators: { satiety: 70, health: 80, happy: 60 } };
   const mood = () => {
     const { satiety, health, happy } = pet.indicators;

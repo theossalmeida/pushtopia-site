@@ -19,6 +19,6 @@ const publicConfig = `window.PUSHTOPIA_CONFIG = ${JSON.stringify({
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 await cp(resolve(root, "assets"), resolve(dist, "assets"), { recursive: true });
-for (const file of ["index.html", "styles.css", "script.js"]) await cp(resolve(root, file), resolve(dist, file));
+for (const file of ["index.html", "styles.css", "badges.css", "script.js"]) await cp(resolve(root, file), resolve(dist, file));
 await writeFile(resolve(dist, "config.js"), publicConfig);
 console.log(`Built static site in ${dist}`);

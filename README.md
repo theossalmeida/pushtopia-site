@@ -39,7 +39,8 @@ Deploy the contents of `dist/` with Cloudflare Pages (direct upload or a Pages p
 
 ## Pending launch items
 
-- The app's levels, streaks, account sync, pet states and activity rules are implemented. This site describes those current features; it does not promise profile badges or cosmetic unlocks.
+- The app's levels, streaks, account sync, pet states, activity rules and opt-in public GitHub badges are implemented. Badge values are selected in the app and served from the backend; the site only documents the experience and does not access GitHub accounts.
+- The default pet names are Brita (dog), Boomie (cat), Haze (shark) and Bono (eagle). The species IDs and sprite paths remain stable for app and badge compatibility, and users can choose a different pet display name in the app.
 - The app processes GitHub activity and progress locally. Optional account sync stores limited pseudonymous progress on the backend; optional analytics sends a minimal app-open event and can be disabled in Settings.
 - A public beta download, privacy notice and support contact must be configured before inviting beta users. See the app repository's `docs/RELEASE.md` and `docs/SECURITY_PRIVACY.md` for the current launch gates.
 - The Cloudflare Pages project and its deployment settings still need to be configured by the owner.
